@@ -1,0 +1,166 @@
+
+       _               _              
+   ___| |__   ___  ___| | _______   __
+  / __| '_ \ / _ \/ __| |/ / _ \ \ / /
+ | (__| | | |  __/ (__|   < (_) \ V / 
+  \___|_| |_|\___|\___|_|\_\___/ \_/  
+                                      
+By Prisma Cloud | version: 3.2.73 
+
+terraform scan results:
+
+Passed checks: 2, Failed checks: 10, Skipped checks: 0
+
+Check: CKV_AWS_41: "Ensure no hard coded AWS access key and secret key exists in provider"
+	PASSED for resource: aws.default
+	File: /test.tf:15-23
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/secrets-policies/bc-aws-secrets-5
+Check: CKV_AWS_133: "Ensure that RDS instances has backup policy"
+	PASSED for resource: aws_rds_cluster.changeme_aws_aurora_cluster_instance
+	File: /test.tf:38-46
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-rds-instances-have-backup-policy
+Check: CKV_AWS_325: "Ensure that RDS Cluster audit logging is enabled for MySQL engine"
+	FAILED for resource: aws_rds_cluster.changeme_aws_aurora_cluster_instance
+	File: /test.tf:38-46
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/bc-aws-325
+
+		38 | resource "aws_rds_cluster" "changeme_aws_aurora_cluster_instance" {
+		39 |   # The login credentials are stored as plain-text in the state files
+		40 |   # https://www.terraform.io/docs/language/state/sensitive-data.html
+		41 |   # For security, use a secrets manager
+		42 |   # https://registry.terraform.io/modules/yurymkomarov/rds-aurora-cluster/aws/latest#secretsmanager_secret
+		43 |   master_username     = var.changeme_aws_aurora_cluster_username
+		44 |   master_password     = var.changeme_aws_aurora_cluster_password
+		45 |   skip_final_snapshot = true
+		46 | }
+
+Check: CKV_AWS_324: "Ensure that RDS Cluster log capture is enabled"
+	FAILED for resource: aws_rds_cluster.changeme_aws_aurora_cluster_instance
+	File: /test.tf:38-46
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/bc-aws-324
+
+		38 | resource "aws_rds_cluster" "changeme_aws_aurora_cluster_instance" {
+		39 |   # The login credentials are stored as plain-text in the state files
+		40 |   # https://www.terraform.io/docs/language/state/sensitive-data.html
+		41 |   # For security, use a secrets manager
+		42 |   # https://registry.terraform.io/modules/yurymkomarov/rds-aurora-cluster/aws/latest#secretsmanager_secret
+		43 |   master_username     = var.changeme_aws_aurora_cluster_username
+		44 |   master_password     = var.changeme_aws_aurora_cluster_password
+		45 |   skip_final_snapshot = true
+		46 | }
+
+Check: CKV_AWS_162: "Ensure RDS cluster has IAM authentication enabled"
+	FAILED for resource: aws_rds_cluster.changeme_aws_aurora_cluster_instance
+	File: /test.tf:38-46
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/ensure-rds-cluster-has-iam-authentication-enabled
+
+		38 | resource "aws_rds_cluster" "changeme_aws_aurora_cluster_instance" {
+		39 |   # The login credentials are stored as plain-text in the state files
+		40 |   # https://www.terraform.io/docs/language/state/sensitive-data.html
+		41 |   # For security, use a secrets manager
+		42 |   # https://registry.terraform.io/modules/yurymkomarov/rds-aurora-cluster/aws/latest#secretsmanager_secret
+		43 |   master_username     = var.changeme_aws_aurora_cluster_username
+		44 |   master_password     = var.changeme_aws_aurora_cluster_password
+		45 |   skip_final_snapshot = true
+		46 | }
+
+Check: CKV_AWS_139: "Ensure that RDS clusters have deletion protection enabled"
+	FAILED for resource: aws_rds_cluster.changeme_aws_aurora_cluster_instance
+	File: /test.tf:38-46
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-rds-clusters-and-instances-have-deletion-protection-enabled
+
+		38 | resource "aws_rds_cluster" "changeme_aws_aurora_cluster_instance" {
+		39 |   # The login credentials are stored as plain-text in the state files
+		40 |   # https://www.terraform.io/docs/language/state/sensitive-data.html
+		41 |   # For security, use a secrets manager
+		42 |   # https://registry.terraform.io/modules/yurymkomarov/rds-aurora-cluster/aws/latest#secretsmanager_secret
+		43 |   master_username     = var.changeme_aws_aurora_cluster_username
+		44 |   master_password     = var.changeme_aws_aurora_cluster_password
+		45 |   skip_final_snapshot = true
+		46 | }
+
+Check: CKV_AWS_326: "Ensure that RDS Aurora Clusters have backtracking enabled"
+	FAILED for resource: aws_rds_cluster.changeme_aws_aurora_cluster_instance
+	File: /test.tf:38-46
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-326
+
+		38 | resource "aws_rds_cluster" "changeme_aws_aurora_cluster_instance" {
+		39 |   # The login credentials are stored as plain-text in the state files
+		40 |   # https://www.terraform.io/docs/language/state/sensitive-data.html
+		41 |   # For security, use a secrets manager
+		42 |   # https://registry.terraform.io/modules/yurymkomarov/rds-aurora-cluster/aws/latest#secretsmanager_secret
+		43 |   master_username     = var.changeme_aws_aurora_cluster_username
+		44 |   master_password     = var.changeme_aws_aurora_cluster_password
+		45 |   skip_final_snapshot = true
+		46 | }
+
+Check: CKV_AWS_96: "Ensure all data stored in Aurora is securely encrypted at rest"
+	FAILED for resource: aws_rds_cluster.changeme_aws_aurora_cluster_instance
+	File: /test.tf:38-46
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-general-38
+
+		38 | resource "aws_rds_cluster" "changeme_aws_aurora_cluster_instance" {
+		39 |   # The login credentials are stored as plain-text in the state files
+		40 |   # https://www.terraform.io/docs/language/state/sensitive-data.html
+		41 |   # For security, use a secrets manager
+		42 |   # https://registry.terraform.io/modules/yurymkomarov/rds-aurora-cluster/aws/latest#secretsmanager_secret
+		43 |   master_username     = var.changeme_aws_aurora_cluster_username
+		44 |   master_password     = var.changeme_aws_aurora_cluster_password
+		45 |   skip_final_snapshot = true
+		46 | }
+
+Check: CKV_AWS_327: "Ensure RDS Clusters are encrypted using KMS CMKs"
+	FAILED for resource: aws_rds_cluster.changeme_aws_aurora_cluster_instance
+	File: /test.tf:38-46
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-327
+
+		38 | resource "aws_rds_cluster" "changeme_aws_aurora_cluster_instance" {
+		39 |   # The login credentials are stored as plain-text in the state files
+		40 |   # https://www.terraform.io/docs/language/state/sensitive-data.html
+		41 |   # For security, use a secrets manager
+		42 |   # https://registry.terraform.io/modules/yurymkomarov/rds-aurora-cluster/aws/latest#secretsmanager_secret
+		43 |   master_username     = var.changeme_aws_aurora_cluster_username
+		44 |   master_password     = var.changeme_aws_aurora_cluster_password
+		45 |   skip_final_snapshot = true
+		46 | }
+
+Check: CKV_AWS_313: "Ensure RDS cluster configured to copy tags to snapshots"
+	FAILED for resource: aws_rds_cluster.changeme_aws_aurora_cluster_instance
+	File: /test.tf:38-46
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-313
+
+		38 | resource "aws_rds_cluster" "changeme_aws_aurora_cluster_instance" {
+		39 |   # The login credentials are stored as plain-text in the state files
+		40 |   # https://www.terraform.io/docs/language/state/sensitive-data.html
+		41 |   # For security, use a secrets manager
+		42 |   # https://registry.terraform.io/modules/yurymkomarov/rds-aurora-cluster/aws/latest#secretsmanager_secret
+		43 |   master_username     = var.changeme_aws_aurora_cluster_username
+		44 |   master_password     = var.changeme_aws_aurora_cluster_password
+		45 |   skip_final_snapshot = true
+		46 | }
+
+Check: CKV_AWS_146: "Ensure that RDS database cluster snapshot is encrypted"
+	FAILED for resource: aws_db_cluster_snapshot.changeme_aws_aurora_snapshot
+	File: /test.tf:49-52
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-rds-database-cluster-snapshot-is-encrypted-1
+
+		49 | resource "aws_db_cluster_snapshot" "changeme_aws_aurora_snapshot" {
+		50 |   db_cluster_identifier          = aws_rds_cluster.changeme_aws_aurora_cluster_instance.id
+		51 |   db_cluster_snapshot_identifier = "changeme-snapshot-identifier"
+		52 | }
+Check: CKV2_AWS_8: "Ensure that RDS clusters has backup plan of AWS Backup"
+	FAILED for resource: aws_rds_cluster.changeme_aws_aurora_cluster_instance
+	File: /test.tf:38-46
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-rds-clusters-has-backup-plan-of-aws-backup
+
+		38 | resource "aws_rds_cluster" "changeme_aws_aurora_cluster_instance" {
+		39 |   # The login credentials are stored as plain-text in the state files
+		40 |   # https://www.terraform.io/docs/language/state/sensitive-data.html
+		41 |   # For security, use a secrets manager
+		42 |   # https://registry.terraform.io/modules/yurymkomarov/rds-aurora-cluster/aws/latest#secretsmanager_secret
+		43 |   master_username     = var.changeme_aws_aurora_cluster_username
+		44 |   master_password     = var.changeme_aws_aurora_cluster_password
+		45 |   skip_final_snapshot = true
+		46 | }
+
+
