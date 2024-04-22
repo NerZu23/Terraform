@@ -49,4 +49,4 @@ resource "aws_rds_cluster" "changeme_aws_aurora_cluster_instance" {
 resource "aws_db_cluster_snapshot" "changeme_aws_aurora_snapshot" {
   db_cluster_identifier          = aws_rds_cluster.changeme_aws_aurora_cluster_instance.id
   db_cluster_snapshot_identifier = "changeme-snapshot-identifier"
-}
+  This is a documment to AWS develop you need to pull up and change the new variables
